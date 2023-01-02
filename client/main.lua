@@ -187,27 +187,6 @@ RegisterNUICallback('cDataPed', function(nData, cb)
     end
 end)
 
-        CreateThread(function()
-            local randommodels = {
-                "mp_m_freemode_01",
-                "mp_f_freemode_01",
-            }
-            local model = joaat(randommodels[math.random(1, #randommodels)])
-            RequestModel(model)
-            while not HasModelLoaded(model) do
-                Wait(0)
-            end
-            charPed = CreatePed(2, model, Config.PedCoords.x, Config.PedCoords.y, Config.PedCoords.z - 0.98, Config.PedCoords.w, false, true)
-            SetPedComponentVariation(charPed, 0, 0, 0, 2)
-            FreezeEntityPosition(charPed, false)
-            SetEntityInvincible(charPed, true)
-            PlaceObjectOnGroundProperly(charPed)
-            SetBlockingOfNonTemporaryEvents(charPed, true)
-        end)
-        cb("ok")
-    end
-end)
-
 RegisterNUICallback('setupCharacters', function(_, cb)
     QBCore.Functions.TriggerCallback("qb-multicharacter:server:setupCharacters", function(result)
         SendNUIMessage({
